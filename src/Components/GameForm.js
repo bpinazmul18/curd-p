@@ -1,48 +1,57 @@
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useState } from "react";
+import { gameAdded } from "../reducer/gameReducer";
 
-const GameForm = () => {
-  // const [value, setValue] = useState("");
-  // console.log("value testing...", value);
+const GameForm = ({ dispatch }) => {
+  const [title, setTitle] = useState("");
+  const [cover, setCover] = useState("");
 
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //
-  //   e.target.name.value(setValue(e.target.value));
-  // };
+  const handleTitleChange = (e) => {
+    e.preventDefault();
+    setTitle(e.target.value);
+  };
+
+  const handleCoverChange = (e) => {
+    e.preventDefault();
+    setCover(e.target.value);
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    dispatch(gameAdded({ title, cover }));
+  };
 
   return (
     <div className="container">
       <div className="gameForm col-md-8 offset-2">
         <h2 className="text-center mt-5 display-4">Add Game</h2>
-        <form>
+        <form onSubmit={handleSave}>
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input
-              name="title"
-              // onChange={handleChange}
-              className="form-control"
+              value={title}
+              onChange={handleTitleChange}
               id="title"
+              name="title"
               type="text"
+              className="form-control"
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="cover">Cover</label>
             <input
-              name="cover"
-              // onChange={handleChange}
-              className="form-control"
+              value={cover}
+              onChange={handleCoverChange}
               id="cover"
+              name="cover"
               type="text"
+              className="form-control"
             />
           </div>
 
           <div className="form-group">
-            <img
-              src="https://i.picsum.photos/id/252/200/200.jpg?hmac=SQ2Qka9ubeKZdr5jg7hHSzQgeyZcKk_o8H4_OkTw3F4"
-              alt=""
-            />
+            <img src={cover} alt="" />
           </div>
           <button className="btn btn-primary">Save Game</button>
         </form>
@@ -51,9 +60,8 @@ const GameForm = () => {
   );
 };
 
-function mapStateToProps(state, props) {
-  console.log("State testing...", state);
-  return { game: state };
+function mapStateToProps(state) {
+  return { games: state.games };
 }
 
 export default connect(mapStateToProps)(GameForm);
