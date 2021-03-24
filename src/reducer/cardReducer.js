@@ -9,7 +9,8 @@ const cardSlice = createSlice({
     cardAdded: (card, action) => {
       card.push({
         id: ++lastId,
-        name: action.payload.name,
+        title: action.payload.title,
+        cover: action.payload.cover,
       });
     },
   },
