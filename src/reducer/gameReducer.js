@@ -1,13 +1,16 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 let lastId = 0;
+const initialState = {
+  games: [],
+};
 
 const cardSlice = createSlice({
   name: "card",
-  initialState: [],
+  initialState,
   reducers: {
-    cardAdded: (card, action) => {
-      card.push({
+    gameAdded: (game, action) => {
+      game.games.push({
         id: ++lastId,
         title: action.payload.title,
         cover: action.payload.cover,
@@ -16,5 +19,5 @@ const cardSlice = createSlice({
   },
 });
 
-export const { cardAdded } = cardSlice.actions;
+export const { gameAdded } = cardSlice.actions;
 export default cardSlice.reducer;

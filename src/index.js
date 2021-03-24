@@ -6,11 +6,11 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import { cardAdded } from "./reducer/cardReducer";
+import { gameAdded } from "./reducer/gameReducer";
 
 const store = configureStore();
 
-store.dispatch(cardAdded({ name: "test", cover: "hello 123" }));
+store.dispatch(gameAdded({ title: "test", cover: "hello 123" }));
 console.log("store", store.getState());
 
 ReactDOM.render(

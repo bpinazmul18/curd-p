@@ -1,4 +1,16 @@
+import { connect } from "react-redux";
+import { useState } from "react";
+
 const GameForm = () => {
+  // const [value, setValue] = useState("");
+  // console.log("value testing...", value);
+
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //
+  //   e.target.name.value(setValue(e.target.value));
+  // };
+
   return (
     <div className="container">
       <div className="gameForm col-md-8 offset-2">
@@ -6,12 +18,24 @@ const GameForm = () => {
         <form>
           <div className="form-group">
             <label htmlFor="title">Title</label>
-            <input className="form-control" id="title" type="text" />
+            <input
+              name="title"
+              // onChange={handleChange}
+              className="form-control"
+              id="title"
+              type="text"
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="cover">Cover</label>
-            <input className="form-control" id="cover" type="text" />
+            <input
+              name="cover"
+              // onChange={handleChange}
+              className="form-control"
+              id="cover"
+              type="text"
+            />
           </div>
 
           <div className="form-group">
@@ -27,4 +51,9 @@ const GameForm = () => {
   );
 };
 
-export default GameForm;
+function mapStateToProps(state, props) {
+  console.log("State testing...", state);
+  return { game: state };
+}
+
+export default connect(mapStateToProps)(GameForm);
