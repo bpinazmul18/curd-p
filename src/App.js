@@ -1,7 +1,7 @@
 import { Link, Switch, Route } from "react-router-dom";
 import HomePage from "./Components/HomePage";
-import GamesPage from "./Components/GamesPage";
 import GameForm from "./Components/GameForm";
+import GamesPage from "./Components/GamesPage";
 
 const App = () => {
   return (

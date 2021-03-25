@@ -1,27 +1,40 @@
-import GamePageCard from "./GamePageCard";
+import { connect } from "react-redux";
+import GamesList from "./GamesList";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import { gameAdded } from "../reducer/gameReducer";
 
-const GamesPage = () => {
+const GamesPage = ({ games, dispatch }) => {
+  const baseURL = "/api/games";
+
+  const [apiGames, setApiGames] = useState();
+
+  useEffect(async () => {
+    await axios.get(baseURL).then((res) => {
+      setApiGames(res.data);
+    });
+  }, []);
+
+  console.log(apiGames);
+
   return (
     <div className="container">
-      <div className="gamePage">
-        <h2 className="text-center my-5 display-4">Games List</h2>
+      <h1 className="text-center my-5 display-4">Games List</h1>
 
-        <div className="row">
-          <div className="col-md-4">
-            <GamePageCard />
-          </div>
-
-          <div className="col-md-4">
-            <GamePageCard />
-          </div>
-
-          <div className="col-md-4">
-            <GamePageCard />
-          </div>
-        </div>
-      </div>
+      <GamesList games={games} />
     </div>
   );
 };
 
-export default GamesPage;
+GamesPage.propTypes = {
+  games: PropTypes.array.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    games: state.games,
+  };
+}
+
+export default connect(mapStateToProps)(GamesPage);

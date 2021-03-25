@@ -1,4 +1,6 @@
-const GamePageCard = () => {
+const GameCard = ({ games }) => {
+  console.log("games", games);
+
   return (
     <div className="card">
       <img
@@ -21,4 +23,4 @@ const GamePageCard = () => {
   );
 };
 
-export default GamePageCard;
+export default GameCard;
